@@ -1,0 +1,83 @@
+
+		<head>
+			<style type="text/css" media="screen">
+				body,html{font-family:var(--markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", system-ui, "Ubuntu", "Droid Sans", sans-serif);font-size:var(--markdown-font-size,14px);padding:0 26px;line-height:var(--markdown-line-height,22px);word-wrap:break-word}body{padding-top:1em}h1,h2,h3,h4,h5,h6,ol,p,pre,ul{margin-top:0}h2,h3,h4,h5,h6{font-weight:400;margin-bottom:.2em}img{max-width:100%;max-height:100%}a{text-decoration:none}a:hover{text-decoration:underline}a:focus,input:focus,select:focus,textarea:focus{outline:1px solid -webkit-focus-ring-color;outline-offset:-1px}p{margin-bottom:.7em}ol,ul{margin-bottom:.7em}hr{border:0;height:2px;border-bottom:2px solid}h1{padding-bottom:.3em;line-height:1.2;border-bottom-width:1px;border-bottom-style:solid;font-weight:400}table{border-collapse:collapse}th{text-align:left;border-bottom:1px solid}td,th{padding:5px 10px}table>tbody>tr+tr>td{border-top:1px solid}blockquote{margin:0 7px 0 5px;padding:0 16px 0 10px;border-left-width:5px;border-left-style:solid}code{font-family:var(--vscode-editor-font-family, "SF Mono", Monaco, Menlo, Consolas, "Ubuntu Mono", "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace);font-size:1em;line-height:1.357em}body.wordWrap pre{white-space:pre-wrap}pre.hljs code>div,pre:not(.hljs){padding:16px;border-radius:3px;overflow:auto}pre code{color:var(--vscode-editor-foreground);tab-size:4}
+			</style>
+		</head>
+		<body>
+			<h1 id="tp---tester-une-api-rest-userservice-avec-junit-et-mockito">TP - Tester une API REST UserService avec JUnit et Mockito</h1>
+<h2 id="📜-contexte">📜 Contexte</h2>
+<ul>
+<li>Vous devez créer une API Rest (CRUD) complète.</li>
+<li>D&#39;une entité <code>User</code> contenant : <code>id</code>, <code>name</code>, <code>email</code>, <code>password</code>.</li>
+<li>D&#39;un <code>UserRepository</code> simulé.</li>
+<li>D&#39;une classe <code>UserServiceImpl</code> à tester, contenant les méthodes suivantes :<ul>
+<li><code>getUserById(Long id)</code></li>
+<li><code>getAllUsers()</code></li>
+<li><code>saveUser(User user)</code></li>
+<li><code>updateUser(Long id, User user)</code></li>
+<li><code>deleteUserById(Long id)</code></li>
+</ul>
+</li>
+<li>Un DTO.</li>
+<li>Un controller.</li>
+<li>3 exceptions à gérer : <ul>
+<li>Si l&#39;email existe lors la phase de creation d&#39;un user, on doit lever une exception.</li>
+<li>Une exception personnaliée globale.</li>
+<li>Une exception lié à un user non trouvé.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="🛠-travail-demandé">🛠 Travail demandé</h2>
+<ol>
+<li><p><strong>Initialisation</strong></p>
+<ul>
+<li>Utiliser <code>@InjectMocks</code> sur <code>UserServiceImpl</code>.</li>
+<li>Utiliser <code>@Mock</code> sur <code>UserRepository</code>.</li>
+<li>Initialiser les mocks avec <code>MockitoAnnotations.openMocks(this)</code> dans <code>@BeforeEach</code>.</li>
+</ul>
+</li>
+<li><p><strong>Tests à réaliser</strong></p>
+<h3 id="récupération">Récupération</h3>
+<ul>
+<li>✔️ Tester la récupération d&#39;un utilisateur existant par ID.</li>
+<li>✔️ Tester le cas où l&#39;utilisateur n&#39;existe pas (doit lancer <code>ObjectNotFoundException</code>).</li>
+<li>✔️ Tester la récupération de tous les utilisateurs.</li>
+</ul>
+<h3 id="création">Création</h3>
+<ul>
+<li>✔️ Tester la création d&#39;un utilisateur avec succès.</li>
+<li>✔️ Tester l&#39;échec de création si l&#39;email est déjà utilisé (lancer <code>DataIntegrityViolationException</code> personnalisée).</li>
+</ul>
+<h3 id="mise-à-jour">Mise à jour</h3>
+<ul>
+<li>✔️ Tester la mise à jour d&#39;un utilisateur existant avec succès.</li>
+<li>✔️ Tester l&#39;échec de mise à jour si l&#39;email est déjà pris par un autre utilisateur (lancer <code>DataIntegrityViolationException</code>).</li>
+</ul>
+<h3 id="suppression">Suppression</h3>
+<ul>
+<li>✔️ Tester la suppression réussie d&#39;un utilisateur.</li>
+<li>✔️ Tester l&#39;échec de suppression si l&#39;utilisateur n&#39;existe pas (doit lancer <code>ObjectNotFoundException</code>).</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="📋-contraintes">📋 Contraintes</h2>
+<ul>
+<li><p>Chaque test doit :</p>
+<ul>
+<li>Vérifier le <strong>comportement fonctionnel</strong> (<code>assertEquals</code>, <code>assertNotNull</code>, etc.).</li>
+<li>Vérifier les <strong>exceptions attendues</strong> (<code>assertThrows</code>).</li>
+<li>Vérifier les <strong>interactions</strong> avec le repository (<code>verify</code>).</li>
+</ul>
+</li>
+<li><p>Utilisez <code>@DisplayName</code> pour décrire chaque test de manière lisible.</p>
+</li>
+<li><p>Pensez à couvrir tous les chemins possibles de votre code.</p>
+</li>
+<li><p>Au moins 9 tests doivent être effectués.</p>
+</li>
+</ul>
+
+		</body>
