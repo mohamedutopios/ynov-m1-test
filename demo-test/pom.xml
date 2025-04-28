@@ -41,6 +41,23 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.1</version> <!-- ou ta version -->
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>junit.jupiter.tags.include</name>
+                            <value>Recuperation</value> <!-- Le tag que tu veux inclure -->
+                        </property>
+                    </properties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

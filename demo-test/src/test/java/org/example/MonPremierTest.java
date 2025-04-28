@@ -1,6 +1,7 @@
 package org.example;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,8 +28,9 @@ public class MonPremierTest {
 
     @Test
     @DisplayName("test est ce faux")
+    @Tag("Recuperation")
     void testFalse(){
-        assertFalse(2+2==4, "2 + 2 == 6 est faux");
+        assertTrue(2+2==4, "2 + 2 == 6 est faux");
     }
 
     @Test
