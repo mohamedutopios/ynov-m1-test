@@ -1,4 +1,5 @@
 package org.example.exception;
 
-public class NotEnoughMoneyException {
+public class NotEnoughMoneyException extends RuntimeException{
+
 }
