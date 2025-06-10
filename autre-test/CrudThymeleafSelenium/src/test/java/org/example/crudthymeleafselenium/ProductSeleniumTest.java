@@ -8,7 +8,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 public class ProductSeleniumTest {
@@ -61,6 +65,31 @@ public class ProductSeleniumTest {
         assertThat(productPrice).isNotNull();
 
     }
+
+    @Test
+    public void testEditProduct(){
+        driver.get(host + "/products");
+        WebElement editLink = driver.findElement(By.xpath("//a[contains(@href,'/products/edit')]"));
+        editLink.click();
+
+        // assertThat(driver.getCurrentUrl()).isEqualTo(host + "/products/edit");
+
+       // driver.get(host + "/products/edit");
+        WebElement nameField = driver.findElement(By.name("name"));
+        nameField.clear();
+        nameField.sendKeys("Update Product");
+        WebElement submitButton = driver.findElement(By.tagName("button"));
+        submitButton.click();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe(host + "/products"));
+
+        driver.get(host + "/products");
+        WebElement productName = driver.findElement(By.xpath("//td[contains(text(),'Update Product')]"));
+        assertThat(productName).isNotNull();
+    }
+
+
 
 
 }
