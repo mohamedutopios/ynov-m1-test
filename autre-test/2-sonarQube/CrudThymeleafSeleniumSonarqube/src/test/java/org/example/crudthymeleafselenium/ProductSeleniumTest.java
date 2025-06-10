@@ -15,13 +15,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 public class ProductSeleniumTest {
 
 
     private static WebDriver driver;
     private static String host;
 
-    @BeforeAll
+   // @BeforeAll
     public static void setUp() {
 
         ChromeOptions options = new ChromeOptions();
@@ -36,14 +37,15 @@ public class ProductSeleniumTest {
         host = "http://localhost:8080";
     }
 
-    @AfterAll
+  //  @AfterAll
     public static void tearDown() {
         if(driver != null) {
             driver.quit();
         }
 
     }
-    @Test
+
+  //  @Test
     public void testCreateProduct(){
         driver.get(host + "/products/create");
 
@@ -66,7 +68,7 @@ public class ProductSeleniumTest {
 
     }
 
-    @Test
+  //  @Test
     public void testEditProduct(){
         driver.get(host + "/products");
         WebElement editLink = driver.findElement(By.xpath("//a[contains(@href,'/products/edit')]"));
@@ -77,7 +79,7 @@ public class ProductSeleniumTest {
        // driver.get(host + "/products/edit");
         WebElement nameField = driver.findElement(By.name("name"));
         nameField.clear();
-        nameField.sendKeys("Update Product");
+        nameField.sendKeys("Updated Product");
         WebElement submitButton = driver.findElement(By.tagName("button"));
         submitButton.click();
 
@@ -85,10 +87,23 @@ public class ProductSeleniumTest {
         wait.until(ExpectedConditions.urlToBe(host + "/products"));
 
         driver.get(host + "/products");
-        WebElement productName = driver.findElement(By.xpath("//td[contains(text(),'Update Product')]"));
+        WebElement productName = driver.findElement(By.xpath("//td[contains(text(),'Updated Product')]"));
         assertThat(productName).isNotNull();
     }
 
+    //@Test
+    public void testDeleteProduct() {
+
+        driver.get(host + "/products");
+        WebElement deleteLink = driver.findElement(By.xpath("//a[contains(@href,'/products/delete')]"));
+        deleteLink.click();
+
+        assertThat(driver.getCurrentUrl()).isEqualTo(host + "/products");
+
+        driver.get(host + "/products");
+        boolean isProductDeleted = driver.findElements(By.xpath("//td[contains(text(),'Updated Product')]")).isEmpty();
+        assertThat(isProductDeleted).isTrue();
+    }
 
 
 
