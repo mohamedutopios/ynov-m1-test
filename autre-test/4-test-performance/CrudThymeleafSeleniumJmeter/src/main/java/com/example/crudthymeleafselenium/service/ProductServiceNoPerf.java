@@ -38,7 +38,7 @@ public class ProductServiceNoPerf {
     public Product findById(Long id) {
         // Requête inefficace: parcourir tous les produits pour trouver celui avec l'ID correspondant
         List<Product> products = new ArrayList<>();
-        products = productRepository.findAll().forEach(products::add);
+        productRepository.findAll().forEach(products::add);
         for (Product product : products) {
             if (product.getId().equals(id)) {
                 return product;
