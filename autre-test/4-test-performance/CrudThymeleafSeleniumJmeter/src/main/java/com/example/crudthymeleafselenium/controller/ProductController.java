@@ -13,8 +13,8 @@ import java.util.List;
 public class ProductController {
 
        @Autowired
-   private ProductService productService;
-   //private ProductServiceNoPerf productService;
+   //private ProductService productService;
+   private ProductServiceNoPerf productService;
 
 
     @GetMapping

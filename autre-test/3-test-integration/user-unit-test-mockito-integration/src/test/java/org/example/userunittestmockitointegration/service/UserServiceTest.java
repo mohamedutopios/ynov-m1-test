@@ -131,7 +131,6 @@ public class UserServiceTest {
         user.setEmail("toto@gmail.com");
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
-
         EntityNotFoundException e = assertThrows(EntityNotFoundException.class, ()-> userService.updateUser(1L,user));
         assertEquals("User not found", e.getMessage());
         verify(userRepository,times(1)).findById(1L);
